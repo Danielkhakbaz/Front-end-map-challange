@@ -1,8 +1,13 @@
+import { useLocationsContext } from "../../../provider/locations/locations-Context";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import "./table.css";
 
 const Table = () => {
+  const { data } = useLocationsContext();
+
+  console.log(data);
+
   return (
     <>
       <table className="table">
@@ -15,21 +20,21 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {data.map((item) => ( */}
-          <tr key={uuidv4()}>
-            {/* <td className="table__td">{item.title}</td>
+          {data.map((item) => (
+            <tr key={uuidv4()}>
+              <td className="table__td">{item.title}</td>
               <td className="table__td">{item.type}</td>
-              <td className="table__td">{item.description}</td> */}
-            <td className="table__td">
-              <button className="table__button table__button--edit">
-                <FaEdit />
-              </button>
-              <button className="table__button table__button--delete">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
-          {/* ))} */}
+              <td className="table__td">{item.description}</td>
+              <td className="table__td">
+                <button className="table__button table__button--edit">
+                  <FaEdit />
+                </button>
+                <button className="table__button table__button--delete">
+                  <FaTrashAlt />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
