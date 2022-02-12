@@ -1,0 +1,27 @@
+.table {
+  border-collapse: collapse;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+.table__thead {
+  background-color: #eeeeee;
+}
+.table__th,
+.table__td {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 1rem;
+  text-align: center;
+}
+.table__button {
+  background-color: transparent;
+  font-size: 24px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: none;
+}
+.table__button--edit {
+  color: rgb(66, 231, 66);
+}
+.table__button--delete {
+  color: rgb(255, 11, 64);
+}

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/layout/layout";
-import Home from "./pages/home";
-import NotFound from "./pages/404";
+import Home from "./pages/home/home";
+import NotFound from "./pages/404/404";
 
 const App = () => {
   return (
