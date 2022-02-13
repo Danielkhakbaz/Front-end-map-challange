@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 
 type dataType = {
+  id: number;
   title: string;
   type: string;
   description: string;
@@ -8,20 +9,26 @@ type dataType = {
 
 type defaultValueType = {
   data: Array<dataType>;
-  // setData: Function;
+  isOpen: boolean;
 };
 
 const defaultValue: defaultValueType = {
   data: [],
-  // setData: () => { },
+  isOpen: false,
 };
 
 type defaultActionsValueType = {
-  setData: Function;
+  openModal: Function;
+  closeModal: Function;
+  editLocation: Function;
+  removeLocation: Function;
 };
 
 const defaultActionsValue: defaultActionsValueType = {
-  setData: () => {},
+  openModal: () => {},
+  closeModal: () => {},
+  editLocation: () => {},
+  removeLocation: () => {},
 };
 
 export const LocationsContext = createContext(defaultValue);

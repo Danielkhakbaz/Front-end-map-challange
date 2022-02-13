@@ -1,12 +1,13 @@
-import { useLocationsContext } from "../../../provider/locations/locations-Context";
+import {
+  useLocationsContext,
+  useLocationsActionsContext,
+} from "../../../provider/locations/locations-Context";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { v4 as uuidv4 } from "uuid";
 import "./table.css";
 
 const Table = () => {
   const { data } = useLocationsContext();
-
-  console.log(data);
+  const { removeLocation } = useLocationsActionsContext();
 
   return (
     <>
@@ -21,7 +22,7 @@ const Table = () => {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={uuidv4()}>
+            <tr key={item.id}>
               <td className="table__td">{item.title}</td>
               <td className="table__td">{item.type}</td>
               <td className="table__td">{item.description}</td>
@@ -29,7 +30,9 @@ const Table = () => {
                 <button className="table__button table__button--edit">
                   <FaEdit />
                 </button>
-                <button className="table__button table__button--delete">
+                <button
+                  className="table__button table__button--delete"
+                  onClick={() => removeLocation(item.id)}>
                   <FaTrashAlt />
                 </button>
               </td>

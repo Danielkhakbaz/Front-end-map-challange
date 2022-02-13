@@ -5,15 +5,13 @@
 }
 .info__button--add {
   background-color: #074ee8;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 10px;
-}
-.info__link {
   color: white;
   display: flex;
   align-items: center;
-  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 8px 10px;
 }
 .info__text {
   margin: 0 4px;
