@@ -1,13 +1,24 @@
+import { useState } from "react";
 import {
   useLocationsContext,
   useLocationsActionsContext,
 } from "../../../provider/locations/locations-Context";
+import Modal from "../../modal/modal";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./table.css";
 
 const Table = () => {
-  const { data } = useLocationsContext();
-  const { removeLocation } = useLocationsActionsContext();
+  const [item, setItem] = useState();
+
+  const { isOpen, data } = useLocationsContext();
+  const { editLocation, removeLocation, changeStatus } =
+    useLocationsActionsContext();
+
+  const handleClick = (location: any) => {
+    editLocation(location);
+    setItem(location);
+    changeStatus("edit");
+  };
 
   return (
     <>
@@ -21,18 +32,20 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td className="table__td">{item.title}</td>
-              <td className="table__td">{item.type}</td>
-              <td className="table__td">{item.description}</td>
+          {data.map((location) => (
+            <tr key={location.id}>
+              <td className="table__td">{location.title}</td>
+              <td className="table__td">{location.type}</td>
+              <td className="table__td">{location.description}</td>
               <td className="table__td">
-                <button className="table__button table__button--edit">
+                <button
+                  className="table__button table__button--edit"
+                  onClick={() => handleClick(location)}>
                   <FaEdit />
                 </button>
                 <button
                   className="table__button table__button--delete"
-                  onClick={() => removeLocation(item.id)}>
+                  onClick={() => removeLocation(location.id)}>
                   <FaTrashAlt />
                 </button>
               </td>
@@ -40,6 +53,7 @@ const Table = () => {
           ))}
         </tbody>
       </table>
+      {isOpen && <Modal item={item} />}
     </>
   );
 };

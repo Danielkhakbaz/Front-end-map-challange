@@ -25,6 +25,7 @@ const LocationsProvider = ({ children }: ChildrenType) => {
       },
     ],
     isOpen: false,
+    status: "add",
   };
 
   const [state, dispatch] = useReducer(LocationsReducer, initalState);
@@ -35,17 +36,32 @@ const LocationsProvider = ({ children }: ChildrenType) => {
   const closeModal = () => {
     dispatch({ type: Actions.CLOSE_MODAL });
   };
-  const editLocation = () => {
-    dispatch({ type: Actions.EDIT_LOCATION });
+  const addLocation = (location: Object) => {
+    dispatch({ type: Actions.ADD_LOCATION, payload: location });
+    closeModal();
+  };
+  const editLocation = (location: Object) => {
+    openModal();
+    dispatch({ type: Actions.EDIT_LOCATION, payload: location });
   };
   const removeLocation = (id: number) => {
     dispatch({ type: Actions.REMOVE_LOCATION, payload: id });
+  };
+  const changeStatus = (status: string) => {
+    dispatch({ type: Actions.CHANGE_STATUS_TO_EDIT, payload: status });
   };
 
   return (
     <LocationsContext.Provider value={{ ...state }}>
       <LocationsActionsContext.Provider
-        value={{ openModal, closeModal, editLocation, removeLocation }}>
+        value={{
+          openModal,
+          closeModal,
+          addLocation,
+          editLocation,
+          removeLocation,
+          changeStatus,
+        }}>
         {children}
       </LocationsActionsContext.Provider>
     </LocationsContext.Provider>

@@ -12,14 +12,36 @@ export const LocationsReducer = (state: any, action: any) => {
         ...state,
         isOpen: false,
       };
-    case Actions.EDIT_LOCATION:
+    case Actions.ADD_LOCATION:
+      const newLocation = { ...action.payload, id: state.data.length + 1 };
+
       return {
         ...state,
+        data: [newLocation, ...state.data],
+      };
+    case Actions.EDIT_LOCATION:
+      const updatedLocation = action.payload;
+
+      const updatedLocations = state.data.map((item: { id: any }) => {
+        if (item.id === updatedLocation.id) {
+          return updatedLocation;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        data: updatedLocations,
       };
     case Actions.REMOVE_LOCATION:
       return {
         ...state,
         data: state.data.filter((item: any) => item.id !== action.payload),
+      };
+    case Actions.CHANGE_STATUS_TO_EDIT:
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;
