@@ -5,11 +5,13 @@ type defaultValueType = {
   data: Array<DataType>;
   isOpen: boolean;
   status: string;
+  location: DataType;
 };
 const defaultValue: defaultValueType = {
   data: [],
   isOpen: false,
   status: "",
+  location: {},
 };
 
 type defaultActionsValueType = {
@@ -19,6 +21,7 @@ type defaultActionsValueType = {
   editLocation: Function;
   removeLocation: Function;
   changeStatus: Function;
+  setLocation: Function;
 };
 const defaultActionsValue: defaultActionsValueType = {
   openModal: () => {},
@@ -27,6 +30,7 @@ const defaultActionsValue: defaultActionsValueType = {
   editLocation: () => {},
   removeLocation: () => {},
   changeStatus: () => {},
+  setLocation: () => {},
 };
 
 export const LocationsContext = createContext(defaultValue);

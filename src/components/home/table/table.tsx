@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   useLocationsContext,
   useLocationsActionsContext,
@@ -8,15 +7,13 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./table.css";
 
 const Table = () => {
-  const [item, setItem] = useState<Object>({});
-
   const { isOpen, data } = useLocationsContext();
-  const { editLocation, removeLocation, changeStatus } =
+  const { editLocation, removeLocation, changeStatus, setLocation } =
     useLocationsActionsContext();
 
   const handleEditButton = (location: Object) => {
     editLocation(location);
-    setItem(location);
+    setLocation(location);
     changeStatus("edit");
   };
 
@@ -53,7 +50,7 @@ const Table = () => {
           ))}
         </tbody>
       </table>
-      {isOpen && <Modal item={item} />}
+      {isOpen && <Modal />}
     </>
   );
 };

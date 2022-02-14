@@ -34,6 +34,7 @@ const LocationsProvider = ({ children }: ChildrenType) => {
     ],
     isOpen: false,
     status: "",
+    location: {},
   };
 
   const [state, dispatch] = useReducer(LocationsReducer, initalState);
@@ -58,6 +59,9 @@ const LocationsProvider = ({ children }: ChildrenType) => {
   const changeStatus = (status: string) => {
     dispatch({ type: Actions.CHANGE_STATUS, payload: status });
   };
+  const setLocation = (location: Object) => {
+    dispatch({ type: Actions.SET_LOCATION, payload: location });
+  };
 
   return (
     <LocationsContext.Provider value={{ ...state }}>
@@ -69,6 +73,7 @@ const LocationsProvider = ({ children }: ChildrenType) => {
           editLocation,
           removeLocation,
           changeStatus,
+          setLocation,
         }}>
         {children}
       </LocationsActionsContext.Provider>

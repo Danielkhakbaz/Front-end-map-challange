@@ -1,5 +1,6 @@
 import { Actions } from "./Actions";
 import { StateType, ActionType } from "../../types/locations-reducer-type";
+import { DataType } from "../../types/data-type";
 
 export const LocationsReducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
@@ -37,12 +38,17 @@ export const LocationsReducer = (state: StateType, action: ActionType) => {
     case Actions.REMOVE_LOCATION:
       return {
         ...state,
-        data: state.data.filter((item: any) => item.id !== action.payload),
+        data: state.data.filter((item: DataType) => item.id !== action.payload),
       };
     case Actions.CHANGE_STATUS:
       return {
         ...state,
         status: action.payload,
+      };
+    case Actions.SET_LOCATION:
+      return {
+        ...state,
+        location: action.payload,
       };
     default:
       return state;

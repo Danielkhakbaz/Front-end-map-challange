@@ -4,6 +4,7 @@ export type StateType = {
   data: Array<DataType>;
   isOpen: boolean;
   status: string;
+  location: DataType;
 };
 
 export type ActionType = {
