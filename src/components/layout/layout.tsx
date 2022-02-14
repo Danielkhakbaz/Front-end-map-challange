@@ -1,12 +1,9 @@
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
+import { ChildrenType } from "../../types/children-type";
 import "./layout.css";
 
-export interface ChildrenProps {
-  children: React.ReactNode;
-}
-
-const Layout = ({ children }: ChildrenProps) => {
+const Layout = ({ children }: ChildrenType) => {
   return (
     <>
       <div className="layout">

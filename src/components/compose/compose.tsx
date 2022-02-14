@@ -1,7 +1,4 @@
-type ComposeType = {
-  components: Array<React.ComponentType | React.ReactNode>;
-  children: React.ReactNode;
-};
+import { ComposeType } from "../../types/compose-type";
 
 const Compose = ({ components, children }: ComposeType) => {
   return (

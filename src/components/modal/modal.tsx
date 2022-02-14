@@ -3,33 +3,25 @@ import {
   useLocationsContext,
   useLocationsActionsContext,
 } from "../../provider/locations/locations-Context";
+import Map from "../map/map";
 import { RiCloseLine } from "react-icons/ri";
+import { ItemType } from "../../types/data-type";
 import "./modal.css";
 
-type ModalProps = {
-  item?: any;
-};
-
-const Modal = ({ item }: ModalProps) => {
-  const options = [
-    { value: "Hospital" },
-    { value: "Bank" },
-    { value: "Educational" },
-  ];
+const Modal = ({ item }: ItemType) => {
   const { status } = useLocationsContext();
+  const { addLocation, closeModal, editLocation } =
+    useLocationsActionsContext();
 
   const [location, setLocation] = useState(
     status === "edit" ? item : { title: "", type: "Hospital", description: "" }
   );
 
-  const { addLocation, closeModal, editLocation } =
-    useLocationsActionsContext();
-
   const handleChange = (value: string, id: string) => {
     setLocation({ ...location, [id]: value });
   };
 
-  const handleClick = () => {
+  const handleShareButton = () => {
     status === "add" ? addLocation(location) : editLocation(location);
     closeModal();
   };
@@ -47,54 +39,56 @@ const Modal = ({ item }: ModalProps) => {
           </button>
         </div>
         <div className="modal__form">
-          <form>
-            <label className="modal__form--title">
-              Location Title:
-              <input
-                id="title"
-                type="text"
-                value={location.title}
-                onChange={(event) =>
-                  handleChange(
-                    event.currentTarget.value,
-                    event.currentTarget.id
-                  )
-                }
-              />
-            </label>
-            <label className="modal__form--type">
-              Location Type:
-              <select
-                id="type"
-                onChange={(event) =>
-                  handleChange(
-                    event.currentTarget.value,
-                    event.currentTarget.id
-                  )
-                }>
-                {options.map((option) => (
-                  <option value={option.value} key={option.value}>
-                    {option.value}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="modal__form--description">
-              Location Description:
-              <textarea
-                id="description"
-                name="location description"
-                value={location.description}
-                onChange={(event) =>
-                  handleChange(
-                    event.currentTarget.value,
-                    event.currentTarget.id
-                  )
-                }
-              />
-            </label>
-          </form>
-          <div className="modal__map">Map</div>
+          <div className="modal__form__map">
+            <form>
+              <label className="modal__form--title">
+                Location Title:
+                <input
+                  id="title"
+                  type="text"
+                  value={location?.title}
+                  onChange={(event) =>
+                    handleChange(
+                      event.currentTarget.value,
+                      event.currentTarget.id
+                    )
+                  }
+                />
+              </label>
+              <label className="modal__form--type">
+                Location Type:
+                <select
+                  id="type"
+                  onChange={(event) =>
+                    handleChange(
+                      event.currentTarget.value,
+                      event.currentTarget.id
+                    )
+                  }>
+                  <option value="Hospital">Hospital</option>
+                  <option value="Bank">Bank</option>
+                  <option value="Educational">Educational</option>
+                </select>
+              </label>
+              <label className="modal__form--description">
+                Location Description:
+                <textarea
+                  id="description"
+                  name="location description"
+                  value={location?.description}
+                  onChange={(event) =>
+                    handleChange(
+                      event.currentTarget.value,
+                      event.currentTarget.id
+                    )
+                  }
+                />
+              </label>
+            </form>
+            <div className="modal__map">
+              <Map lat={location?.lat} lng={location?.lng} />
+            </div>
+          </div>
         </div>
         <hr />
         <div className="modal__actions">
@@ -105,7 +99,7 @@ const Modal = ({ item }: ModalProps) => {
           </button>
           <button
             className="modal__button modal__button--share"
-            onClick={() => handleClick()}>
+            onClick={() => handleShareButton()}>
             Share
           </button>
         </div>

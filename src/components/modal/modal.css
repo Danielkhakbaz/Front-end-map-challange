@@ -85,6 +85,13 @@
   border: 2px solid gray;
   border-radius: 5px;
 }
+.modal__form__map {
+  display: flex;
+  flex-direction: row;
+}
+.modal__map {
+  margin-left: 20px;
+}
 .modal__actions {
   display: flex;
   justify-content: flex-end;

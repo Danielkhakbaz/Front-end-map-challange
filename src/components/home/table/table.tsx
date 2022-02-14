@@ -8,13 +8,13 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./table.css";
 
 const Table = () => {
-  const [item, setItem] = useState();
+  const [item, setItem] = useState<Object>({});
 
   const { isOpen, data } = useLocationsContext();
   const { editLocation, removeLocation, changeStatus } =
     useLocationsActionsContext();
 
-  const handleClick = (location: any) => {
+  const handleEditButton = (location: Object) => {
     editLocation(location);
     setItem(location);
     changeStatus("edit");
@@ -40,7 +40,7 @@ const Table = () => {
               <td className="table__td">
                 <button
                   className="table__button table__button--edit"
-                  onClick={() => handleClick(location)}>
+                  onClick={() => handleEditButton(location)}>
                   <FaEdit />
                 </button>
                 <button

@@ -1,11 +1,8 @@
 import { useReducer } from "react";
 import { LocationsReducer } from "./locations-Reducer";
 import { LocationsContext, LocationsActionsContext } from "./locations-Context";
+import { ChildrenType } from "../../types/children-type";
 import { Actions } from "./Actions";
-
-type ChildrenType = {
-  children: React.ReactNode;
-};
 
 const LocationsProvider = ({ children }: ChildrenType) => {
   const initalState = {
@@ -15,17 +12,28 @@ const LocationsProvider = ({ children }: ChildrenType) => {
         title: "Shetab Health Center",
         type: "Hospital",
         description: "It's a hospital at ...",
+        lat: 35.760839,
+        lng: 51.360271,
       },
-      { id: 2, title: "Bokharest Tower", type: "Business", description: "" },
+      {
+        id: 2,
+        title: "Bokharest Tower",
+        type: "Business",
+        description: "",
+        lat: 35.77059,
+        lng: 51.426911,
+      },
       {
         id: 3,
         title: "Danesh School",
         type: "Educational",
         description: "This school is based on ...",
+        lat: 35.744679,
+        lng: 51.405611,
       },
     ],
     isOpen: false,
-    status: "add",
+    status: "",
   };
 
   const [state, dispatch] = useReducer(LocationsReducer, initalState);
@@ -48,7 +56,7 @@ const LocationsProvider = ({ children }: ChildrenType) => {
     dispatch({ type: Actions.REMOVE_LOCATION, payload: id });
   };
   const changeStatus = (status: string) => {
-    dispatch({ type: Actions.CHANGE_STATUS_TO_EDIT, payload: status });
+    dispatch({ type: Actions.CHANGE_STATUS, payload: status });
   };
 
   return (

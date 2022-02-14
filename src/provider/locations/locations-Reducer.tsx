@@ -1,6 +1,7 @@
 import { Actions } from "./Actions";
+import { StateType, ActionType } from "../../types/locations-reducer-type";
 
-export const LocationsReducer = (state: any, action: any) => {
+export const LocationsReducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
     case Actions.OPEN_MODAL:
       return {
@@ -22,7 +23,7 @@ export const LocationsReducer = (state: any, action: any) => {
     case Actions.EDIT_LOCATION:
       const updatedLocation = action.payload;
 
-      const updatedLocations = state.data.map((item: { id: any }) => {
+      const updatedLocations = state.data.map((item) => {
         if (item.id === updatedLocation.id) {
           return updatedLocation;
         }
@@ -38,7 +39,7 @@ export const LocationsReducer = (state: any, action: any) => {
         ...state,
         data: state.data.filter((item: any) => item.id !== action.payload),
       };
-    case Actions.CHANGE_STATUS_TO_EDIT:
+    case Actions.CHANGE_STATUS:
       return {
         ...state,
         status: action.payload,
