@@ -1,0 +1,14 @@
+.notFound__title {
+  text-align: center;
+}
+.notFound__link {
+  text-decoration: none;
+}
+.notFound__button {
+  background-color: #074ee8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
